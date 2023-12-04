@@ -2,26 +2,38 @@ version: '3.7'
 
 services:
   postgres:
-    image: postgres
-    container_name: postgres
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: username
-      POSTGRES_DB: testdb
+    build:
+      context: ./postgresdb
     ports:
       - "5432:5432"
+    networks:
+      - todonetwork
   
-  spring-app:
+  backend:
     image: hse-23-winter:191123
     build:
-      context: .
-      dockerfile: todobackend/Dockerfile
+      context: ./todobackend
     container_name: your-spring-app-container
     ports:
       - "8080:8080"
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/testdb
-      SPRING_DATASOURCE_USERNAME: username
-      SPRING_DATASOURCE_PASSWORD: password
+      - DB_HOST=localhost
+      - DB_CONNECTION_STRING=postgres://logalhost:Mep321@postgres:5432/TodoList
+    networks:
+      - todonetwork
+    
+  frontend:
+    build:
+      context: ./todofrontend
+    ports:
+      - "80:80"
+    networks:
+      - todonetwork
+    depends_on:
+      - backend
+
+networks:
+  todonetwork:
+    driver: bridge
