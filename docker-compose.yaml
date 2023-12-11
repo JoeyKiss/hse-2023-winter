@@ -20,7 +20,9 @@ services:
       - postgres
     environment:
       - DB_HOST=localhost
-      - DB_CONNECTION_STRING=postgres://logalhost:Mep321@postgres:5432/TodoList
+      - SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/TodoList
+      - SPRING_DATASOURCE_USERNAME: postgres
+      - SPRING_DATASOURCE_PASSWORD: password
     networks:
       - todonetwork
     
