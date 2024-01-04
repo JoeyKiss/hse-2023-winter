@@ -2,8 +2,13 @@ version: '3.7'
 
 services:
   postgres:
-    build:
-      context: ./postgresdb
+    # build:
+    # context: ./postgresdb
+    image: postgres
+    environment:
+      POSTGRES_DB: TodoList
+      POSTGRES_USER: todoGuy
+      POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     networks:

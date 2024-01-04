@@ -38,7 +38,7 @@ public class TodoController {
         return ResponseEntity.notFound().build();
 	}
 
-	@PostMapping("/todos")
+	@PostMapping("/todos/{title}")
 	public ResponseEntity<Todo> CreateTodo(@PathVariable String title){
 		var item = new Todo();
 		item.title = title;
