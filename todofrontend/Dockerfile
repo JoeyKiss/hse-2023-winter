@@ -2,7 +2,7 @@
 FROM nginx:latest
 
 # Set an environment variable with a default API base URL
-ENV API_BASE_URL http://localhost:8090
+ENV API_BASE_URL http://localhost:8080
 
 # Copy your web application files to the appropriate directory
 COPY . /usr/share/nginx/html
